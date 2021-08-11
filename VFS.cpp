@@ -312,6 +312,7 @@ int rm_File(char *name)
     }
     UFDTArr[fd].ptrfiletable = NULL;
     (SUPERBLOCKobj.FreeInode)++;
+    return 0;
 }
 
 int ReadFile(int fd, char *arr, int isize)
@@ -568,6 +569,7 @@ int LseekFile(int fd, int size, int from)
             (UFDTArr[fd].ptrfiletable->writeoffset) = (UFDTArr[fd].ptrfiletable->ptrinode->FileActualSize) + size;
         }
     }
+    return 0;
 }
 
 void ls_file()
@@ -679,6 +681,7 @@ int truncate_File(char *name)
     UFDTArr[fd].ptrfiletable->readoffset = 0;
     UFDTArr[fd].ptrfiletable->writeoffset = 0;
     UFDTArr[fd].ptrfiletable->ptrinode->FileActualSize = 0;
+    return 0;   
 }
 
 int main()
@@ -865,8 +868,7 @@ int main()
                     printf("ERROR : File empty\n");
                 if (ret > 0)
                 {
-                    //fwrite(2,ptr,ret);
-                    // fwrite(ptr);
+                    write(2,ptr,ret);
                 }
                 continue;
             }
